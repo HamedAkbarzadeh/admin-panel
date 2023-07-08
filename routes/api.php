@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Market\BrandController;
 use App\Http\Controllers\Admin\Market\CommentController;
 use App\Http\Controllers\Admin\Market\CopanController;
@@ -25,8 +26,11 @@ use App\Models\Market\ProductCategory;
 
 /////////////// Admin Panel ///////////////
 Route::prefix('admin')->group(function(){
+    ///// Dashboard //////
+    Route::prefix('/dashboard')->group(function() {
+        Route::get('/' , [HomeController::class , 'index']);
+    });
     ///// Market /////
-
 /// Product-category ///
 Route::prefix('product-category')->group(function () {
     Route::get('/' , [ProductCategoryController::class , 'index'])->name('admin.market.product-category');
@@ -34,7 +38,7 @@ Route::prefix('product-category')->group(function () {
     Route::post('/store' , [ProductCategoryController::class , 'store'])->name('admin.market.product-category.store');
     Route::put('/update/{productCategory}' , [ProductCategoryController::class , 'update'])->name('admin.market.product-category.put');
     Route::delete('/destroy/{productCategory}' , [ProductCategoryController::class , 'destroy'])->name('admin.market.product-category.destroy');
-    Route::get('/status/{productCategory}' , [ProductCategoryController::class , 'status'])->name('admin.market.product-category.status')->where('productCategory' , '[0-1]');
+    Route::get('/status/{productCategory}' , [ProductCategoryController::class , 'status'])->name('admin.market.product-category.status');
     //custom
     Route::get('/parent/{productCategory}' , [ProductCategoryController::class , 'parent'])->name('admin.market.product-category.parent');
     Route::get('/children/{productCategory}' , [ProductCategoryController::class , 'children'])->name('admin.market.product-category.children')->where('productCategory' , '[0-9]+');
@@ -48,7 +52,7 @@ Route::prefix('brand')->group(function () {
     Route::post('/store' , [BrandController::class , 'store'])->name('admin.market.brand.store');
     Route::put('/update/{brand}' , [BrandController::class , 'update'])->name('admin.market.brand.put');
     Route::delete('/destroy/{brand}' , [BrandController::class , 'destroy'])->name('admin.market.brand.destroy');
-    Route::get('/status/{brand}' , [BrandController::class , 'status'])->name('admin.market.brand.status')->where('brand' , '[0-1]');
+    Route::get('/status/{brand}' , [BrandController::class , 'status'])->name('admin.market.brand.status');
     //custom
     Route::get('/get-brand/{number}' , [BrandController::class , 'getBrand'])->name('admin.market.brand.get-brand')->where('number' , '[0-9]+');
 });
@@ -61,14 +65,13 @@ Route::prefix('product')->group(function(){
     Route::put('/update/{product}' , [ProductController::class , 'update'])->name('admin.market.product.put');
     Route::delete('/destroy/{product}' , [ProductController::class , 'destroy'])->name('admin.market.product.destroy');
     //custom
-    Route::get('/status/{product}' , [ProductController::class , 'status'])->name('admin.market.store.status')->where('product' , '[0-1]');
+    Route::get('/status/{product}' , [ProductController::class , 'status'])->name('admin.market.store.status');
     Route::get('/get-product/{number}' , [ProductController::class , 'getProduct'])->name('admin.market.product.get-product')->where('number' , '[0-9]+');
 });
 
 /// store ///
 Route::prefix('store')->group(function(){
     Route::get('/' , [StoreController::class , 'index'])->name('admin.market.store');
-    Route::get('/show/{product}' , [StoreController::class , 'show'])->name('admin.market.store.show')->where('product' , '[0-9]+');
     Route::post('/store/{product}' , [StoreController::class , 'store'])->name('admin.market.store.store');
     Route::put('/update/{product}' , [StoreController::class , 'update'])->name('admin.market.store.put');
     //custom
@@ -96,7 +99,7 @@ Route::prefix('comment')->group(function(){
         Route::get('/show-item/{order}', [OrderController::class, 'showItem'])->name('admin.market.order.showItem');
         Route::get('/change-send-status/{order}', [OrderController::class, 'changeSendStatus'])->name('admin.market.order.changeSendStatus');
         Route::get('/change-order-status/{order}', [OrderController::class, 'changeOrderStatus'])->name('admin.market.order.changeOrderStatus');
-        Route::get('/cancel-order/{order}', [OrderController::class, 'cancelOrder'])->name('admin.market.order.cancelOrder');
+        //Route::get('/cancel-order/{order}', [OrderController::class, 'cancelOrder'])->name('admin.market.order.cancelOrder');
     });
 
     //payment

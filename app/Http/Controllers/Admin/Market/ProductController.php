@@ -16,9 +16,28 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+          /**
+     * @OA\Get(
+     *    path="/admin/product",
+     *    operationId="product",
+     *    tags={"Product"},
+     *    summary="Get Products Detail",
+     *    description="Get Products Detail",
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *          @OA\Property(property="status_code", type="integer", example="200"),
+     *          @OA\Property(property="data",type="object")
+     *           ),
+     *        )
+     *       )
+     *  )
+     */
     public function index()
     {
-        $products = Product::where('status' , 1)->where('marketable' , 1)->orderBy('created_at' , 'desc')->paginat(15)->get();
+        $products = Product::where('status' , 1)->where('marketable' , 1)->orderBy('created_at' , 'desc')->paginate(15);
 
         return response()->json([
             'products' => $products,
@@ -32,6 +51,37 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     */
+   /**
+     * @OA\Post(
+     *      path="/admin/product/store",
+     *      operationId="Productstore",
+     *      tags={"Product"},
+     *      summary="Store Product in DB",
+     *      description="Store Product in DB",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"name", "introduction" , "image", "status" , "tags" , "price", "brand_id" , "category_id" , "published_at"},
+     *            @OA\Property(property="name", type="string", format="string", example="Test Product name"),
+     *            @OA\Property(property="introduction", type="string", format="string", example="Test Product introduction"),
+     *            @OA\Property(property="image", type="string", format="string", example="Test Product image"),
+     *            @OA\Property(property="tags", type="string", format="string", example="Test Product tags"),
+     *            @OA\Property(property="price", type="integer", format="integer", example="14,500,000"),
+     *            @OA\Property(property="status", type="integer", format="integer", example="0 Or 1"),
+     *            @OA\Property(property="brand_id", type="integer", format="integer", example="brand ID"),
+     *            @OA\Property(property="category_id", type="integer", format="integer", example="Category ID"),
+     *            @OA\Property(property="published_at", type="integer", format="integer", example="published_at"),
+     *         ),
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=""),
+     *             @OA\Property(property="data",type="object")
+     *          )
+     *       )
+     *  )
      */
     public function store(ProductRequest $request)
     {
@@ -65,9 +115,31 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+            /**
+     * @OA\Get(
+     *    path="/admin/product/show/{product}",
+     *    operationId="Productshow",
+     *    tags={"Product"},
+     *    summary="Get Product Detail",
+     *    description="Get Product Detail",
+     *    @OA\Parameter(name="product", in="path", description="Id of Product", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *          @OA\Property(property="status_code", type="integer", example="200"),
+     *          @OA\Property(property="data",type="object")
+     *           ),
+     *        )
+     *       )
+     *  )
+     */
     public function show($product)
     {
-        $prd = Product::where('id' , $product)->with('metas')->get();
+        $prd = Product::where('id' , $product)->with('metas')->first();
         return response()->json([
             'product' => $prd,
             'status' => true
@@ -83,6 +155,41 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Put(
+     *     path="/admin/product/update/{product}",
+     *     operationId="productUpdate",
+     *     tags={"Product"},
+     *     summary="Update Prorduct in DB",
+     *     description="Update Prorduct in DB",
+     *     @OA\Parameter(name="product", in="path", description="Id of product", required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"name", "introduction" , "image", "status" , "tags" , "price", "brand_id" , "category_id" , "published_at"},
+     *            @OA\Property(property="name", type="string", format="string", example="Test Product name"),
+     *            @OA\Property(property="introduction", type="string", format="string", example="Test Product introduction"),
+     *            @OA\Property(property="image", type="string", format="string", example="Test Product image"),
+     *            @OA\Property(property="tags", type="string", format="string", example="Test Product tags"),
+     *            @OA\Property(property="price", type="integer", format="integer", example="14,500,000"),
+     *            @OA\Property(property="status", type="integer", format="integer", example="0 Or 1"),
+     *            @OA\Property(property="brand_id", type="integer", format="integer", example="brand ID"),
+     *            @OA\Property(property="category_id", type="integer", format="integer", example="Category ID"),
+     *            @OA\Property(property="published_at", type="integer", format="integer", example="published_at"),
+     *         ),
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="status_code", type="integer", example="200"),
+     *             @OA\Property(property="data",type="object")
+     *          )
+     *       )
+     *  )
+     */
+
     public function update(ProductRequest $request, Product $product)
     {
         $inputs = $request->all();
@@ -112,6 +219,30 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+        /**
+     * @OA\Delete(
+     *    path="/admin/product/destroy/{product}",
+     *    operationId="productDestroy",
+     *    tags={"Product"},
+     *    summary="Delete Product",
+     *    description="Delete Product",
+     *    @OA\Parameter(name="product", in="path", description="Id of Product", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *    @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="status_code", type="integer", example="200"),
+     *         @OA\Property(property="data",type="object")
+     *          ),
+     *       )
+     *      )
+     *  )
+     */
+
+
     public function destroy(Product $product)
     {
         $product->metas()->delete();
@@ -121,7 +252,27 @@ class ProductController extends Controller
             'status' => true,
         ]);
     }
-
+            /**
+     * @OA\Get(
+     *    path="/admin/product/get-product/{number}",
+     *    operationId="get-product",
+     *    tags={"Product"},
+     *    summary="Get Any Product Detail",
+     *    description="Get Any Product Detail",
+     *    @OA\Parameter(name="number", in="path", description="Id of Product Category", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *          @OA\Property(property="status_code", type="integer", example="200"),
+     *          @OA\Property(property="data",type="object")
+     *           ),
+     *        )
+     *       )
+     *  )
+     */
     public function getProduct($number)
     {
         $products = Product::where('status' , 1)->where('marketable' , 1)->orderBy('created_at' , 'desc')->take($number)->with('metas')->get();
@@ -130,10 +281,30 @@ class ProductController extends Controller
             'status' => true
         ]);
     }
-
-    public function statua(Product $product)
+         /**
+     * @OA\Get(
+     *    path="/admin/product/status/{product}",
+     *    operationId="productStatus",
+     *    tags={"Product"},
+     *    summary="Change Status",
+     *    description="Change Status",
+     *    @OA\Parameter(name="product", in="path", description="Id of Product", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *          @OA\Property(property="status_code", type="integer", example="200"),
+     *          @OA\Property(property="data",type="object")
+     *           ),
+     *        )
+     *       )
+     *  )
+     */
+    public function status(Product $product)
     {
-        $product->statua == 0 ? $product->statua = 1 : $product->statua = 0;
+        $product->status == 0 ? $product->status = 1 : $product->status = 0;
         $product->save();
         return response()->json([
             'msg' => 'عملیات با موفقیت انجام شد',

@@ -7,12 +7,32 @@ use App\Http\Requests\Admin\Market\ProductCategoryRequest;
 use App\Models\Market\ProductCategory;
 use Illuminate\Http\Request;
 
+
+
 class ProductCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     */
+    /**
+     * @OA\Get(
+     *    path="/admin/product-category",
+     *    tags={"Product Category"},
+     *    summary="Get Product Categories Detail",
+     *    description="Get Product Categories Detail",
+
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *          @OA\Property(property="status_code", type="integer", example="200"),
+     *          @OA\Property(property="data",type="object")
+     *           ),
+     *        )
+     *       )
+     *  )
      */
     public function index()
     {
@@ -27,6 +47,28 @@ class ProductCategoryController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     */
+
+         /**
+     * @OA\Get(
+     *    path="/admin/product-category/show/{productCategory}",
+     *    operationId="Categoryshow",
+     *    tags={"Product Category"},
+     *    summary="Get Product Category Detail",
+     *    description="Get Product Category Detail",
+     *    @OA\Parameter(name="productCategory", in="path", description="Id of Product Category", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *          @OA\Property(property="status_code", type="integer", example="200"),
+     *          @OA\Property(property="data",type="object")
+     *           ),
+     *        )
+     *       )
+     *  )
      */
     public function show($productCategory)
     {
@@ -43,6 +85,36 @@ class ProductCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+   /**
+     * @OA\Post(
+     *      path="/admin/product-category/store",
+     *      operationId="store",
+     *      tags={"Product Category"},
+     *      summary="Store Product Category in DB",
+     *      description="Store Product Category in DB",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"name", "description" , "show_in_menu", "status" , "tags" , "parent_id"},
+     *            @OA\Property(property="name", type="string", format="string", example="Test Category name"),
+     *            @OA\Property(property="description", type="string", format="string", example="Test Category description"),
+     *            @OA\Property(property="image", type="string", format="string", example="Test Category image (OPT)"),
+     *            @OA\Property(property="show_in_menu", type="integer", format="integer", example="0 Or 1"),
+     *            @OA\Property(property="status", type="integer", format="integer", example="0 Or 1"),
+     *            @OA\Property(property="parent_id", type="integer", format="integer", example="Parent ID Category"),
+     *         ),
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=""),
+     *             @OA\Property(property="data",type="object")
+     *          )
+     *       )
+     *  )
+     */
+
     public function store(ProductCategoryRequest $request)
     {
         $inputs = $request->all();
@@ -63,6 +135,40 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+         /**
+     * @OA\Put(
+     *     path="/admin/product-category/update/{productCategory}",
+     *     operationId="update",
+     *     tags={"Product Category"},
+     *     summary="Update Prorduct Category in DB",
+     *     description="Update Prorduct Category in DB",
+     *     @OA\Parameter(name="productCategory", in="path", description="Id of Article", required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"name", "description" , "show_in_menu", "status" , "tags" , "parent_id"},
+     *            @OA\Property(property="name", type="string", format="string", example="Test Category name"),
+     *            @OA\Property(property="description", type="string", format="string", example="Test Category description"),
+     *            @OA\Property(property="image", type="string", format="string", example="Test Category image (OPT)"),
+     *            @OA\Property(property="show_in_menu", type="integer", format="integer", example="0 Or 1"),
+     *            @OA\Property(property="status", type="integer", format="integer", example="0 Or 1"),
+     *            @OA\Property(property="parent_id", type="integer", format="integer", example="Parent ID Category"),
+     *         ),
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="status_code", type="integer", example="200"),
+     *             @OA\Property(property="data",type="object")
+     *          )
+     *       )
+     *  )
+     */
+
     public function update(ProductCategoryRequest $request, ProductCategory $productCategory)
     {
         $inputs = $request->all();
@@ -81,6 +187,28 @@ class ProductCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+        /**
+     * @OA\Delete(
+     *    path="/admin/product-category/destroy/{productCategory}",
+     *    operationId="destroy",
+     *    tags={"Product Category"},
+     *    summary="Delete Product Category",
+     *    description="Delete Product Category",
+     *    @OA\Parameter(name="productCategory", in="path", description="Id of Product Category", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *    @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="status_code", type="integer", example="200"),
+     *         @OA\Property(property="data",type="object")
+     *          ),
+     *       )
+     *      )
+     *  )
+     */
+
     public function destroy(ProductCategory $productCategory)
     {
         if($productCategory->children()->count()){
@@ -92,6 +220,28 @@ class ProductCategoryController extends Controller
             'status' => true,
         ]);
     }
+
+     /**
+     * @OA\Get(
+     *    path="/admin/product-category/parent/{productCategory}",
+     *    operationId="parent",
+     *    tags={"Product Category"},
+     *    summary="Get Product Category Parent Detail",
+     *    description="Get Product Category Parent Detail",
+     *    @OA\Parameter(name="productCategory", in="path", description="Id of Product Category", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *          @OA\Property(property="status_code", type="integer", example="200"),
+     *          @OA\Property(property="data",type="object")
+     *           ),
+     *        )
+     *       )
+     *  )
+     */
     public function parent(ProductCategory $productCategory)
 {
     if($productCategory->parent_id != null && $productCategory->parent()->count()){
@@ -106,6 +256,28 @@ class ProductCategoryController extends Controller
         'status' => $status,
     ]);
 }
+
+     /**
+     * @OA\Get(
+     *    path="/admin/product-category/children/{productCategory}",
+     *    operationId="children",
+     *    tags={"Product Category"},
+     *    summary="Get Product Category Children Detail",
+     *    description="Get Product Category Children Detail",
+     *    @OA\Parameter(name="productCategory", in="path", description="Id of Product Category", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *          @OA\Property(property="status_code", type="integer", example="200"),
+     *          @OA\Property(property="data",type="object")
+     *           ),
+     *        )
+     *       )
+     *  )
+     */
 public function children(ProductCategory $productCategory)
 {
 
@@ -123,6 +295,27 @@ public function children(ProductCategory $productCategory)
     ]);
 }
 
+     /**
+     * @OA\Get(
+     *    path="/admin/product-category/get-category/{number}",
+     *    operationId="getCategory",
+     *    tags={"Product Category"},
+     *    summary="Get Any Product Categories Detail",
+     *    description="Get Any Product Categories Detail",
+     *    @OA\Parameter(name="number", in="path", description="Id of Product Category", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *          @OA\Property(property="status_code", type="integer", example="200"),
+     *          @OA\Property(property="data",type="object")
+     *           ),
+     *        )
+     *       )
+     *  )
+     */
 public function getCategory($number)
 {
     $categories = ProductCategory::where('status' , 1)->where('show_in_menu' , 1)->with(['children' , 'parent'])->orderBy('created_at', 'DESC')->take($number)->get();
@@ -132,10 +325,30 @@ public function getCategory($number)
     ]);
 }
 
-
-public function statua(ProductCategory $productCategory)
+     /**
+     * @OA\Get(
+     *    path="/admin/product-category/status/{productCategory}",
+     *    operationId="status",
+     *    tags={"Product Category"},
+     *    summary="Change Status",
+     *    description="Change Status",
+     *    @OA\Parameter(name="productCategory", in="path", description="Id of Product Category", required=true,
+     *        @OA\Schema(type="integer")
+     *    ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *          @OA\Property(property="status_code", type="integer", example="200"),
+     *          @OA\Property(property="data",type="object")
+     *           ),
+     *        )
+     *       )
+     *  )
+     */
+public function status(ProductCategory $productCategory)
 {
-    $productCategory->statua == 0 ? $productCategory->statua = 1 : $productCategory->statua = 0;
+    $productCategory->status == 0 ? $productCategory->status = 1 : $productCategory->status = 0;
     $productCategory->save();
     return response()->json([
         'msg' => 'عملیات با موفقیت انجام شد',

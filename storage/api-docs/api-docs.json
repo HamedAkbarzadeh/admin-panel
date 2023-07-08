@@ -1,0 +1,2548 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Admin-Panel-Api",
+        "description": "Laravel Api",
+        "contact": {
+            "name": "Hamed",
+            "email": "h.akbarzadh@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "2.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
+    "paths": {
+        "/admin/dashboard": {
+            "get": {
+                "tags": [
+                    "Admin Dashboard"
+                ],
+                "summary": "Get Dashboard Detail",
+                "description": "Get Dashboard Detail",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/brand": {
+            "get": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Get Brands Detail",
+                "description": "Get Brands Detail",
+                "operationId": "get-brand",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/brand/store": {
+            "post": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Store Brand in DB",
+                "description": "Store Brand in DB",
+                "operationId": "brandStore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "persian_name",
+                                    "original_name",
+                                    "logo",
+                                    "status",
+                                    "tags"
+                                ],
+                                "properties": {
+                                    "persian_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test persian_name"
+                                    },
+                                    "original_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test original_name"
+                                    },
+                                    "logo": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test logo"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "0 Or 1"
+                                    },
+                                    "tags": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test tags"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/brand/show/{brand}": {
+            "get": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Get Brand Detail",
+                "description": "Get Brand Detail",
+                "operationId": "brandshow",
+                "parameters": [
+                    {
+                        "name": "brand",
+                        "in": "path",
+                        "description": "Id of brand",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/brand/update/{brand}": {
+            "put": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Update Brand in DB",
+                "description": "Update Brand in DB",
+                "operationId": "brandUpdate",
+                "parameters": [
+                    {
+                        "name": "brand",
+                        "in": "path",
+                        "description": "Id of Article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "persian_name",
+                                    "original_name",
+                                    "logo",
+                                    "status",
+                                    "tags"
+                                ],
+                                "properties": {
+                                    "persian_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test persian_name"
+                                    },
+                                    "original_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test original_name"
+                                    },
+                                    "logo": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test logo"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "0 Or 1"
+                                    },
+                                    "tags": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test tags"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/brand/destroy/{brand}": {
+            "delete": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Delete Brand",
+                "description": "Delete Brand",
+                "operationId": "brandDestroy",
+                "parameters": [
+                    {
+                        "name": "brand",
+                        "in": "path",
+                        "description": "Id of Product Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/brand/get-brand/{number}": {
+            "get": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Get Any Brand Detail",
+                "description": "Get Any Brand Detail",
+                "operationId": "brandNumber",
+                "parameters": [
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "description": "number",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/brand/status/{brand}": {
+            "get": {
+                "tags": [
+                    "Brand"
+                ],
+                "summary": "Change Status",
+                "description": "Change Status",
+                "operationId": "brandStatus",
+                "parameters": [
+                    {
+                        "name": "brand",
+                        "in": "path",
+                        "description": "Id of Brand",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/comment": {
+            "get": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Get Comments Detail",
+                "description": "Get Comments Detail",
+                "operationId": "comment",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/comment/answer/{comment}": {
+            "post": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Answer Comment in DB",
+                "description": "Answer Brand in DB",
+                "operationId": "commentAnswer",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "Id of comment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "body"
+                                ],
+                                "properties": {
+                                    "body": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test body"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/comment/show/{comment}": {
+            "get": {
+                "tags": [
+                    "showComment"
+                ],
+                "summary": "Get comment Detail",
+                "description": "Get comment Detail",
+                "operationId": "Commentshow",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "Id of comment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/comment/approved/{comment}": {
+            "get": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Approved Comment Detail",
+                "description": "Approved Brand Detail",
+                "operationId": "commentApproved",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "Id of comment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/comment/status/{comment}": {
+            "get": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Change Status",
+                "description": "Change Status",
+                "operationId": "commentStatus",
+                "parameters": [
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "description": "Id of comment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/discount/copon": {
+            "get": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "get all copon Detail",
+                "description": "get all copon Detail",
+                "operationId": "allCopon",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/discount/copon/store": {
+            "post": {
+                "tags": [
+                    "Discount"
+                ],
+                "summary": "Store Copon in DB",
+                "description": "Store Copon in DB",
+                "operationId": "storeCopon",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "code",
+                                    "amount",
+                                    "amount_type",
+                                    "discount_ceiling",
+                                    "type",
+                                    "status",
+                                    "start_date",
+                                    "end_date",
+                                    "user_id"
+                                ],
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "win30"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "0 Or 1"
+                                    },
+                                    "amount_type": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "0 Or 1"
+                                    },
+                                    "amount": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "150000"
+                                    },
+                                    "discount_ceiling": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "52"
+                                    },
+                                    "type": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "0 OR 1"
+                                    },
+                                    "start_date": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "214215321213"
+                                    },
+                                    "end_date": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "214215321213"
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/order/new-order": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get all new orders Detail",
+                "description": "Get all new orders Detail",
+                "operationId": "newOrder",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/sending": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get all sending orders Detail",
+                "description": "Get all sending orders Detail",
+                "operationId": "seningOrder",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/unpaid": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get all unpaid orders Detail",
+                "description": "Get all unpaid orders Detail",
+                "operationId": "unpaidOrder",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/canceled": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get all canceled orders Detail",
+                "description": "Get all canceled orders Detail",
+                "operationId": "canceledOrder",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/returned": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get all returned orders Detail",
+                "description": "Get all returned orders Detail",
+                "operationId": "returnedOrder",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/order": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get all orders Detail",
+                "description": "Get all orders Detail",
+                "operationId": "allOrder",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/order/show/{order}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "show order Detail",
+                "description": "show order Detail",
+                "operationId": "orderShow",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "Id of order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/order/show-item/{order}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "show item order Detail",
+                "description": "show item order Detail",
+                "operationId": "orderShowItem",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "Id of order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/order/change-send-status/{order}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "change send status",
+                "description": "change send status",
+                "operationId": "changeSendStatusItem",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "Id of order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/order/change-order-status/{order}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "change order status",
+                "description": "change order status",
+                "operationId": "changeOrderStatusItem",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "Id of order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/payment": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "get all payments status",
+                "description": "get all payments status",
+                "operationId": "allPayment",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/payment/online": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "get online payments status",
+                "description": "get online payments status",
+                "operationId": "onlinePayment",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/offline": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "get offline payments status",
+                "description": "get offline payments status",
+                "operationId": "offlinePayment",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/payment/attendance": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "get attendance payments status",
+                "description": "get attendance payments status",
+                "operationId": "attendancePayment",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/payment/confirm/{payment}": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "confirm payment Detail",
+                "description": "confirm Brand Detail",
+                "operationId": "paymentConfirm",
+                "parameters": [
+                    {
+                        "name": "payment",
+                        "in": "path",
+                        "description": "Id of payment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/payment/cancel/{payment}": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "cancel payment Detail",
+                "description": "cancel Brand Detail",
+                "operationId": "cancelConfirm",
+                "parameters": [
+                    {
+                        "name": "payment",
+                        "in": "path",
+                        "description": "Id of payment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/payment/return/{payment}": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "return payment Detail",
+                "description": "return Brand Detail",
+                "operationId": "returnConfirm",
+                "parameters": [
+                    {
+                        "name": "payment",
+                        "in": "path",
+                        "description": "Id of payment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/payment/NotConfirm/{payment}": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "NotConfirm payment Detail",
+                "description": "NotConfirm Brand Detail",
+                "operationId": "paymentNotConfirm",
+                "parameters": [
+                    {
+                        "name": "payment",
+                        "in": "path",
+                        "description": "Id of payment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/payment/show/{payment}": {
+            "get": {
+                "tags": [
+                    "Payment"
+                ],
+                "summary": "show payment Detail",
+                "description": "show Brand Detail",
+                "operationId": "paymentShow",
+                "parameters": [
+                    {
+                        "name": "payment",
+                        "in": "path",
+                        "description": "Id of payment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product-category": {
+            "get": {
+                "tags": [
+                    "Product Category"
+                ],
+                "summary": "Get Product Categories Detail",
+                "description": "Get Product Categories Detail",
+                "operationId": "d92ebfbf50ec82976974f4df86600c03",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product-category/show/{productCategory}": {
+            "get": {
+                "tags": [
+                    "Product Category"
+                ],
+                "summary": "Get Product Category Detail",
+                "description": "Get Product Category Detail",
+                "operationId": "Categoryshow",
+                "parameters": [
+                    {
+                        "name": "productCategory",
+                        "in": "path",
+                        "description": "Id of Product Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product-category/store": {
+            "post": {
+                "tags": [
+                    "Product Category"
+                ],
+                "summary": "Store Product Category in DB",
+                "description": "Store Product Category in DB",
+                "operationId": "store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "show_in_menu",
+                                    "status",
+                                    "tags",
+                                    "parent_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Category name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Category description"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Category image (OPT)"
+                                    },
+                                    "show_in_menu": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "0 Or 1"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "0 Or 1"
+                                    },
+                                    "parent_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "Parent ID Category"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product-category/update/{productCategory}": {
+            "put": {
+                "tags": [
+                    "Product Category"
+                ],
+                "summary": "Update Prorduct Category in DB",
+                "description": "Update Prorduct Category in DB",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "productCategory",
+                        "in": "path",
+                        "description": "Id of Article",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "description",
+                                    "show_in_menu",
+                                    "status",
+                                    "tags",
+                                    "parent_id"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Category name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Category description"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Category image (OPT)"
+                                    },
+                                    "show_in_menu": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "0 Or 1"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "0 Or 1"
+                                    },
+                                    "parent_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "Parent ID Category"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product-category/destroy/{productCategory}": {
+            "delete": {
+                "tags": [
+                    "Product Category"
+                ],
+                "summary": "Delete Product Category",
+                "description": "Delete Product Category",
+                "operationId": "destroy",
+                "parameters": [
+                    {
+                        "name": "productCategory",
+                        "in": "path",
+                        "description": "Id of Product Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product-category/parent/{productCategory}": {
+            "get": {
+                "tags": [
+                    "Product Category"
+                ],
+                "summary": "Get Product Category Parent Detail",
+                "description": "Get Product Category Parent Detail",
+                "operationId": "parent",
+                "parameters": [
+                    {
+                        "name": "productCategory",
+                        "in": "path",
+                        "description": "Id of Product Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product-category/children/{productCategory}": {
+            "get": {
+                "tags": [
+                    "Product Category"
+                ],
+                "summary": "Get Product Category Children Detail",
+                "description": "Get Product Category Children Detail",
+                "operationId": "children",
+                "parameters": [
+                    {
+                        "name": "productCategory",
+                        "in": "path",
+                        "description": "Id of Product Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product-category/get-category/{number}": {
+            "get": {
+                "tags": [
+                    "Product Category"
+                ],
+                "summary": "Get Any Product Categories Detail",
+                "description": "Get Any Product Categories Detail",
+                "operationId": "getCategory",
+                "parameters": [
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "description": "Id of Product Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product-category/status/{productCategory}": {
+            "get": {
+                "tags": [
+                    "Product Category"
+                ],
+                "summary": "Change Status",
+                "description": "Change Status",
+                "operationId": "status",
+                "parameters": [
+                    {
+                        "name": "productCategory",
+                        "in": "path",
+                        "description": "Id of Product Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Products Detail",
+                "description": "Get Products Detail",
+                "operationId": "product",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product/store": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Store Product in DB",
+                "description": "Store Product in DB",
+                "operationId": "Productstore",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "introduction",
+                                    "image",
+                                    "status",
+                                    "tags",
+                                    "price",
+                                    "brand_id",
+                                    "category_id",
+                                    "published_at"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Product name"
+                                    },
+                                    "introduction": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Product introduction"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Product image"
+                                    },
+                                    "tags": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Product tags"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "14,500,000"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "0 Or 1"
+                                    },
+                                    "brand_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "brand ID"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "Category ID"
+                                    },
+                                    "published_at": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "published_at"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product/show/{product}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Product Detail",
+                "description": "Get Product Detail",
+                "operationId": "Productshow",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Id of Product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product/update/{product}": {
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update Prorduct in DB",
+                "description": "Update Prorduct in DB",
+                "operationId": "productUpdate",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Id of product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "introduction",
+                                    "image",
+                                    "status",
+                                    "tags",
+                                    "price",
+                                    "brand_id",
+                                    "category_id",
+                                    "published_at"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Product name"
+                                    },
+                                    "introduction": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Product introduction"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Product image"
+                                    },
+                                    "tags": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Test Product tags"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "14,500,000"
+                                    },
+                                    "status": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "0 Or 1"
+                                    },
+                                    "brand_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "brand ID"
+                                    },
+                                    "category_id": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "Category ID"
+                                    },
+                                    "published_at": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "published_at"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product/destroy/{product}": {
+            "delete": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Delete Product",
+                "description": "Delete Product",
+                "operationId": "productDestroy",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Id of Product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product/get-product/{number}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get Any Product Detail",
+                "description": "Get Any Product Detail",
+                "operationId": "get-product",
+                "parameters": [
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "description": "Id of Product Category",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/product/status/{product}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Change Status",
+                "description": "Change Status",
+                "operationId": "productStatus",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Id of Product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/store": {
+            "get": {
+                "tags": [
+                    "Store"
+                ],
+                "summary": "Get Store Detail",
+                "description": "Get Store Detail",
+                "operationId": "storeIndex",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/store/store/{product}": {
+            "post": {
+                "tags": [
+                    "Store"
+                ],
+                "summary": "Store product_marketable in DB",
+                "description": "Store product_marketable in DB",
+                "operationId": "storeStore",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Id of product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "marketable_number",
+                                    "receiver",
+                                    "delivery",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "receiver": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Alex"
+                                    },
+                                    "delivery": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "David"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "description"
+                                    },
+                                    "marketable_number": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "5"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/store/update/{product}": {
+            "put": {
+                "tags": [
+                    "Store"
+                ],
+                "summary": "Update Store in DB",
+                "description": "Update Store in DB",
+                "operationId": "storeUpdate",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "Id of product",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "marketable_number",
+                                    "receiver",
+                                    "delivery",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "receiver": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Alex"
+                                    },
+                                    "delivery": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "David"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "description"
+                                    },
+                                    "marketable_number": {
+                                        "type": "integer",
+                                        "format": "integer",
+                                        "example": "5"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/store/get-store/{number}": {
+            "get": {
+                "tags": [
+                    "Store"
+                ],
+                "summary": "Get Store Detail",
+                "description": "Get Store Detail",
+                "operationId": "storeShow",
+                "parameters": [
+                    {
+                        "name": "number",
+                        "in": "path",
+                        "description": "Id of brand",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status_code": {
+                                            "type": "integer",
+                                            "example": "200"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

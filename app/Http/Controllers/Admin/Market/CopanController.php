@@ -14,6 +14,24 @@ class CopanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /**
+     * @OA\Get(
+     *    path="/admin/discount/copon",
+     *    operationId="allCopon",
+     *    tags={"Discount"},
+     *    summary="get all copon Detail",
+     *    description="get all copon Detail",
+     *     @OA\Response(
+     *          response=200,
+     *          description="Success",
+     *          @OA\JsonContent(
+     *          @OA\Property(property="status_code", type="integer", example="200"),
+     *          @OA\Property(property="data",type="object")
+     *           ),
+     *        )
+     *       )
+     *  )
+     */
     public function index()
     {
         $copons = Copan::where('created_at'  , 'desc')->get();
@@ -29,6 +47,37 @@ class CopanController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     */
+           /**
+     * @OA\Post(
+     *      path="/admin/discount/copon/store",
+     *      operationId="storeCopon",
+     *      tags={"Discount"},
+     *      summary="Store Copon in DB",
+     *      description="Store Copon in DB",
+     *      @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *            required={"code", "amount" , "amount_type", "discount_ceiling" , "type" , "status", "start_date" , "end_date", "user_id"},
+     *            @OA\Property(property="code", type="string", format="string", example="win30"),
+     *            @OA\Property(property="status", type="integer", format="integer", example="0 Or 1"),
+     *            @OA\Property(property="amount_type", type="integer", format="integer", example="0 Or 1"),
+     *            @OA\Property(property="amount", type="integer", format="integer", example="150000"),
+     *            @OA\Property(property="discount_ceiling", type="integer", format="integer", example="52"),
+     *            @OA\Property(property="type", type="integer", format="integer", example="0 OR 1"),
+     *            @OA\Property(property="start_date", type="integer", format="integer", example="214215321213"),
+     *            @OA\Property(property="end_date", type="integer", format="integer", example="214215321213"),
+     *            @OA\Property(property="user_id", type="integer", format="integer", example="2"),
+     *         ),
+     *      ),
+     *     @OA\Response(
+     *          response=200, description="Success",
+     *          @OA\JsonContent(
+     *             @OA\Property(property="status", type="integer", example=""),
+     *             @OA\Property(property="data",type="object")
+     *          )
+     *       )
+     *  )
      */
     public function store(CopanRequest $request)
     {
